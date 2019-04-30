@@ -6,10 +6,10 @@ My past game-like projects have taught me to start at a scope of roughly half of
 
 # Minimum viable game requirements
 ## Finite State Machine
-* Conditional Branching
+* ~~Conditional Branching~~
 
 ## Content
-* State descriptions
+* ~~State descriptions~~
 * State transition descriptions
 * Conditional descriptions (implemented as item usage)
 
