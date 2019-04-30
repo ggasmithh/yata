@@ -11,7 +11,6 @@ My past game-like projects have taught me to start at a scope of roughly half of
 ## Content
 * ~~State descriptions~~
 * State transition descriptions
-* Conditional descriptions (implemented as item usage)
 
 # Post-minimum viable stuff
 ## Finite State Machine
