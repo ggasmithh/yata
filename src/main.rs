@@ -12,12 +12,14 @@ enum State {
 }
 
 struct Engine {
+    last_state: State,
     state: State
 }
 
 impl Engine {
     fn new() -> Self {
         Engine {
+            last_state: State::Start,
             state: State::Start
         }
     }
@@ -29,7 +31,9 @@ impl Engine {
                 match choice {
                     's' => self.state = State::First,
                     _ => (),
-                }           
+                }
+
+                       
             }
 
             State::First {..} => {
@@ -37,6 +41,7 @@ impl Engine {
                     's' => self.state = State::Second,
                     _ => (),
                 }
+                self.last_state = State::First; 
             }
 
             State::Second {..} => {
@@ -45,6 +50,8 @@ impl Engine {
                     'w' => self.state = State::Fourth,
                     _ => (),
                 }
+
+                self.last_state = State::Second; 
             }
 
             State::Third {..} => {
@@ -53,6 +60,8 @@ impl Engine {
                     'u' => self.state = State::Second,
                     _ => (),
                 }
+
+                self.last_state = State::Third; 
             }
 
             State::Fourth {..} => {
@@ -60,10 +69,13 @@ impl Engine {
                     'd' => self.state = State::First,
                     _ => (),
                 }
+
+                self.last_state = State::Fourth; 
             }
 
             State::End {..} => {
-                self.state = State::End
+                self.state = State::End;
+                self.last_state = State::End; 
             }
         };
     }
@@ -71,8 +83,8 @@ impl Engine {
     fn print_state(&mut self) {
 
         match self.state {
-            State::Start {..} => println!("You are in the Start State.\n\nThe \
-                First State lies to the (s)outh."),
+            State::Start {..} => println!("You are in the Start State of this \
+                Finite State Machine.\n\nThe First State lies to the (s)outh."),
 
             State::First {..} => println!("As your eyes adjust to the light, \
                 you see that you are now in the First State.\n\nThe Second \
@@ -102,6 +114,58 @@ impl Engine {
         }
     }
 
+    fn print_transition(&mut self)  {
+        // Only certain state changes will have transitions
+        match self.last_state {
+            State::Start {..} => {
+                match self.state {
+                    State::First {..} => println!("The path out of the cave \
+                        leads upwards, and you feel a breeze from the exit.\n"),
+
+                    _ => (),
+                }
+            }
+
+            State::Second {..} => {
+                match self.state {
+                    State::Third {..} => println!("You walk down the winding \
+                        road to the east.\n"),
+
+                    State::Fourth {..} => println!("You start up the hill \
+                        looming to the west.\n"),
+
+                    _ => (),
+                }
+            }
+
+            State::Third {..} => {
+                match self.state {
+                    State::Second {..} => println!("A rope ladder drops from \
+                        somewhere in the sky, but outside of your vision. You \
+                        climb.\n"),
+
+                    State::End {..} => println!("With a start, you realize \
+                        you have been walking forwards toward the End State for \
+                        some time now.\n"),
+
+                    _ => (),
+                }
+            }
+
+            State::Fourth {..} => {
+                match self.state {
+                    State::First {..} => println!("You feel exhausted as you \
+                        are lowered into the ground. You awake standing in a \
+                        vast field with the sun directly overhead\n"),
+
+                    _ => (),
+                }
+            }
+
+            _ => ()
+        }
+    }
+
 
 }
 
@@ -128,8 +192,9 @@ fn main() {
 
     loop{
         print!("{}[2J", 27 as char);
+        engine.print_transition();
         engine.print_state();
         input = get_input();
-        engine.update_state(input);
+        engine.update_state(input);    
     }
 }

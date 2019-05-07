@@ -4,13 +4,9 @@ As I used untitled_rl as a C++ refresher, and yarl (purged from internet as a ma
 # What?
 My past game-like projects have taught me to start at a scope of roughly half of what I think I can handle. I want to make this a text-based adventure, so I'll make a finite state machine instead and go from there. My moonshot end-goal is to have yata be merely a text-based adventure engine, reading states, transitions, etc, from an external file.
 
-# Minimum viable game requirements
-## Finite State Machine
-* ~~Conditional Branching~~
-
-## Content
-* ~~State descriptions~~
-* State transition descriptions
+# Thoughts
+I'm beginging to question whether a FSM is the best pattern to use for a text adventure. It makes sense for locations to be implemented as States, but
+the presentation of content--to me--lends itself more to object oriented.
 
 # Post-minimum viable stuff
 ## Finite State Machine
@@ -19,4 +15,12 @@ My past game-like projects have taught me to start at a scope of roughly half of
 
 ## Content
 * Item descriptions
+
+# ~~Minimum viable game requirements~~
+## ~~Finite State Machine~~
+* ~~Conditional Branching~~
+
+## ~~Content~~
+* ~~State descriptions~~
+* ~~State transition descriptions~~
 
